@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('visitors', function (Blueprint $table) {
             $table->id();
             $table->string('visitor_id')->unique();
-            $table->string('stamp');
-            $table->timestamps();
+            $table->string('visitor_email')->unique();
+            $table->timestamps(); 
         });
     }
 

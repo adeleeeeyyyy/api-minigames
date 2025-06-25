@@ -11,8 +11,8 @@ class Visitor extends Model
     use HasApiTokens, Notifiable;
     protected $fillable = [
         'visitor_id',
-        'stamp',
+        'visitor_email',
     ];
 
-    
+
 }
