@@ -13,10 +13,14 @@ class DeveloperSeed extends Seeder
      */
     public function run(): void
     {
-        Developer::create([
-            'developer_id' => uniqid('developer_'),
-            'division' => 'WebDev',
-            'logo' => ''
-        ]);
+        $divisions = ['WebDev', 'MobileDev', 'Cysec', 'GameDev'];
+
+        foreach ($divisions as $division) {
+            Developer::create([
+                'developer_id' => uniqid('developer_'),
+                'division' => $division,
+                'logo' => 'images/division_logos/' . strtolower($division) . '.png'
+            ]);
+        }
     }
 }

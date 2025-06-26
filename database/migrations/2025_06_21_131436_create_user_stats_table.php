@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('user_stats', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id')->nullable();
-            $table->integer('point')->nullable();
+            $table->string('visitor_id');
+            $table->integer('point')->default(0);
             $table->timestamps();
 
             //FK
-            $table->index('user_id');
-            $table->foreign('user_id')->references('userid')->on('users')->onDelete('cascade');
+            $table->index('visitor_id');
+            $table->foreign('visitor_id')->references('visitor_id')->on('visitors')->onDelete('cascade');
         });
     }
 

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Developer;
+use App\Models\User;
+use App\Models\UserStat;
 use App\Models\Visitor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,6 +24,11 @@ class AuthController extends Controller
             $visitor = Visitor::create([
                 'visitor_id' => $visitor_id,
                 'visitor_email' => $request->email
+            ]);
+
+            UserStat::create([
+                'visitor_id' => $visitor_id,
+                'point' => 0
             ]);
         });
 
@@ -65,5 +73,23 @@ class AuthController extends Controller
                 "message" => "Username or password incorrect"
             ], 401);
         }
+    }
+
+    public function loginDeveloper($developer_id) {
+        $developer = Developer::where('developer_id', '=', $developer_id)->first();
+        $token = $developer->createToken("auth_token")->plainTextToken;
+        return response()->json([
+            'success' => true,
+            'data' => $developer,
+            'token' => $token
+        ]);
+    }
+
+    public function seeDivision() {
+        $developer = Developer::get();
+        return response()->json([
+            'success' => true,
+            'data' => $developer
+        ]);
     }
 }
