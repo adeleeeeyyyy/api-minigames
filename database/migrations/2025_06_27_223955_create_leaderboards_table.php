@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('visitors', function (Blueprint $table) {
+        Schema::create('leaderboards', function (Blueprint $table) {
             $table->id();
-            $table->string('visitor_id')->unique();
-            $table->string('visitor_email')->unique();
-            $table->string('total_vote')->default(0);
+            $table->string('project_id')->unique();
+            $table->string('name');
+            $table->string('division');
+            $table->string('Author');
+            $table->integer('vote')->default(0);
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('visitors');
+        Schema::dropIfExists('leaderboards');
     }
 };
